@@ -1,4 +1,4 @@
-# Daloradius+wireguard+pihole+unbound en  debian 11
+# Daloradius+openvpn+pihole+unbound en  debian 11 para mikrotik
 Se realiza la instalacion de Daloradius ,en conjunto con Pihole y unbound :shipit:
 
 - [x] Daloradius
