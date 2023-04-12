@@ -2,9 +2,9 @@
 Se realiza la instalacion de Daloradius ,en conjunto con Pihole y unbound :shipit:
 
 - [x] Daloradius
-- [x] Openvpn
-- [x] Pihole
-- [x] Unbound
+- [x] Openvpn repo externo
+- [x] Pihole repo externo
+- [x] Unbound repo externo
 
 ## Preparacion del vps 
 - Activar ipv6 en contabo
@@ -209,151 +209,10 @@ mysql -p -u root radius < dbname.sql
 ```
 
 ## Instalacion de Openvpn para mikrotik en Servidor debian 11
-- Primero descargamos el script a nuestro sistema , ene ste caso, debian 11.
+- La instalacion siguiente continua aqui
 ```
-wget https://raw.githubusercontent.com/volstr/openvpn-install-routeros/main/openvpn-install-routeros.sh -O openvpn-install-routeros.sh
-#wget https://raw.githubusercontent.com/wirisp/openvpn-pihole-unbound/main/openvpn-install-routeros.sh -O openvpn-install-routeros.sh
-```
-- Despues ejecutamos el script descargado
-```
-sudo bash ./openvpn-install-routeros.sh
-```
-> si te pregunta el tipo de conexion , selecciona tcp
-
-- Despues cambiamos los dns con
-
-```
-nano /etc/openvpn/server/server.conf
+https://github.com/wirisp/openvpn-pihole-unbound
 ```
 
-_Comentamos las lineas siguientes y en su lugar colocamos una nueva con la ip que usaremos de DNS_
-```
-#Stop using Google DNS for our OpenVPN
-#push "dhcp-option DNS 8.8.8.8"
-#push "dhcp-option DNS 8.8.4.4"
-```
-- Colocamos esta nueva
-
-```
-push "dhcp-option DNS 10.8.0.1"
-```
-- Reiniciamos el servicio de openvpn con
-
-```
-systemctl start openvpn-server@server.service
-systemctl status openvpn-server@server.service
-```
-
-
-### Instalacion de Pihole en debian 11
-```
-systemctl stop wg-quick@wg0.service
-wg-quick down wg0
-```
-_Pihole no esta soportado en debian 11 por lo que mostrara error primero_
-```
-curl -sSL https://install.pi-hole.net | bash
-```
-_Despues lanzamos el siguiente comando desactivando la comprobacion de sistema_
-```
-#curl -sSL https://install.pi-hole.net | sudo PIHOLE_SKIP_OS_CHECK=true bash
-curl -sSL https://install.pi-hole.net | PIHOLE_SKIP_OS_CHECK=true bash
-```
-
-En la configuracion, seleccionar la interfaz que fue creada al instalar openvpn, la cual deveria ser `tun0` o algo parecido.
-
-_Cambiamos el password con_
-```
-PIHOLE_SKIP_OS_CHECK=true sudo -E pihole -a -p
-```
-
-_Iniciamos los servicios con_
-```
-systemctl start wg-quick@wg0.service
-systemctl status wg-quick@wg0.service
-```
-
-## Instalacion y configuracion de unbound
-Instalamos unbound con el siguiente comando, no antes de darle permisos
-```
-wget https://raw.githubusercontent.com/wirisp/openvpn-pihole-unbound/main/unbound.sh -O unbound.sh
-```
-
-```
-chmod +x *.sh
-./unbound.sh 
-```
-Despues editamos el archivo
-
-```
-> /etc/pihole/setupVars.conf 
-```
-
-```
-echo "PIHOLE_INTERFACE=tun0
-QUERY_LOGGING=true
-INSTALL_WEB_SERVER=true
-INSTALL_WEB_INTERFACE=true
-LIGHTTPD_ENABLED=true
-CACHE_SIZE=10000
-DNS_FQDN_REQUIRED=true
-DNS_BOGUS_PRIV=true
-DNSMASQ_LISTENING=single
-WEBPASSWORD=a31c87c18e9ff2eca7edb3aa0f7ee8ec24e92157a6f55d873115fd4084c37b0c
-BLOCKING_ENABLED=true
-PIHOLE_DNS_1=127.0.0.1#5335
-PIHOLE_DNS_2=127.0.0.1#5335
-DNSSEC=false
-REV_SERVER=false" >> /etc/pihole/setupVars.conf 
-```
-
-- Activamos con
-
-```
-systemctl enable pihole-FTL
-```
-- Cambio de password con
-
-```
-pihole -a -p
-```
-
-_Reiniciamos_
-```
-reboot
-```
-
-
-## Conexion de openvpn a mikrotik
-- Subir los archivos del cliente correspondientes, al Administrador de archivos, en este caso el cliente se llama Mk17, por lo que se suben `Mk17.crt` y `Mk17.key`
-<img width="454" alt="image" src="https://user-images.githubusercontent.com/13319563/222213812-80b61638-2fc8-4ee0-b79e-902e7316d32d.png">
-- Despues en la terminal los importamos
-
-
-```
-certificate import file-name=Mk17.crt
-certificate import file-name=Mk17.key
-```
-
-- Creamos el perfil que usaremos
-
-```
-ppp profile add name=OVPN-client change-tcp-mss=yes only-one=yes use-encryption=yes use-mpls=no use-compression=no
-```
-- Creamos la inteface ppp para ovpn
-```
-interface ovpn-client add name=ovpn-client connect-to=xxx.xxx.xxx.xxx port=1194 mode=ip user="openvpn" password="" profile=OVPN-client certificate=Mk17.crt_0 auth=sha1 cipher=blowfish128 add-default-route=yes
-```
-- Cambia los Dns en 
-```
-/ip dns
-set allow-remote-requests=yes servers=10.8.0.1
-```
-
-y tambien en 
-
-```
-/ip dhcp-server network
-```
 >Listo ya tenemos configurado y corriendo Openvpn con pihole y unbound, podemos administrar desde `IP/admin`
 
