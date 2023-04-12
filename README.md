@@ -1,10 +1,7 @@
-# Daloradius+openvpn+pihole+unbound en  debian 11 para mikrotik
+# Daloradius debian 11 para mikrotik
 Se realiza la instalacion de Daloradius ,en conjunto con Pihole y unbound :shipit:
 
 - [x] Daloradius
-- [x] Openvpn repo externo
-- [x] Pihole repo externo
-- [x] Unbound repo externo
 
 ## Preparacion del vps 
 - Activar ipv6 en contabo
