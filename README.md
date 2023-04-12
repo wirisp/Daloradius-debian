@@ -158,6 +158,11 @@ nano etc/freeradius/3.0/sites-enabled/default
 #nano /etc/freeradius/3.0/mods-config/sql/counter/mysql/quotalimit.conf
 ```
 
+```
+\mv /root/dapiun/eap /etc/freeradius/3.0/mods-available/eap
+# Activada la opcion para usar NAS-identifier como atributo y limitar a un solo NAS al usuario
+```
+
 > Aqui hay cambios que no se hicieron post-auth
 ```
 \mv /root/dapiun/queries.conf /etc/freeradius/3.0/mods-config/sql/main/mysql/queries.conf
