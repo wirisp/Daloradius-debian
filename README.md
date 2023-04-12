@@ -159,7 +159,8 @@ nano etc/freeradius/3.0/sites-enabled/default
 ```
 
 ```
-\mv /root/dapiun/eap /etc/freeradius/3.0/mods-available/eap
+wget https://raw.githubusercontent.com/wirisp/Daloradius-debian/main/eap -O eap
+\mv eap /etc/freeradius/3.0/mods-available/eap
 # Activada la opcion para usar NAS-identifier como atributo y limitar a un solo NAS al usuario
 ```
 
