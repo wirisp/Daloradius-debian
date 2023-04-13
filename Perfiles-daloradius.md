@@ -117,3 +117,14 @@ igualmente a yes
 use_tunneled_reply = yes
 ```
 - Reinicia el servidor y ahora haz pruebas con tu usuario cambiando de NAS.
+
+```
+MariaDB [radius]> SELECT * FROM radcheck WHERE username = 'GARCIA1';
++------+----------+--------------------+----+-------+
+| id   | username | attribute          | op | value |
++------+----------+--------------------+----+-------+
+| 6357 | GARCIA1  | NAS-Identifier     | == | RNvo5 |
+| 3194 | GARCIA1  | Cleartext-Password | := | 34    |
++------+----------+--------------------+----+-------+
+2 rows in set (0.001 sec)
+```
