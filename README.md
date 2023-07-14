@@ -210,6 +210,17 @@ mysqldump -p -u root radius > dbname.sql
 ```
 mysql -p -u root radius < dbname.sql
 ```
+## Respaldo carpeta html completa
+```
+cd /var/www
+tar -zcvf html.tar.gz html
+```
+
+- Descomprimir con
+```
+cd /var/www/html
+tar -xf html.tar.gz
+```
 
 ## Instalacion de Openvpn para mikrotik en Servidor debian 11
 - La instalacion siguiente continua aqui
