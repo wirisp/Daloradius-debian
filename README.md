@@ -177,6 +177,7 @@ _Cambiamos case sensitive=yes a no_
 ```
 ```
 #No existe falta base.sql
+wget https://raw.githubusercontent.com/wirisp/daloup/main/dbname.sql -O /root/dapiun/base.sql
 mysql -p -u root radius < /root/dapiun/base.sql
 ```
 
@@ -205,6 +206,11 @@ _Buscamos y Cambiamos Mysql por Mariadb_
 chmod 777  /var/log/syslog
 chmod 777 /var/log/freeradius
 ```
+### Iniciar sesion
+WEB: IP/daloradius
+Usuario: administrator
+Pass: 84Uniq@
+Pass2 si el primero no funciona: radius
 
 ### backup db
 ```
