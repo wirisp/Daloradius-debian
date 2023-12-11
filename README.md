@@ -34,7 +34,7 @@ reboot
 ```
 
 ```
-apt install software-properties-common dirmngr -y
+apt install software-properties-common dirmngr -y git
 apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'
 add-apt-repository 'deb [arch=amd64,arm64,ppc64el] https://mirror.rackspace.com/mariadb/repo/10.5/debian bullseye main'
 #add-apt-repository 'deb [arch=amd64,arm64,ppc64el] https://mirror.rackspace.com/mariadb/repo/10.5/ubuntu focal main'
@@ -47,7 +47,7 @@ systemctl start mysql.service
 mysql_secure_installation
 # enter
 # Disallow root login remotely? [Y/n] n
-# password usada aqui es 84Uniq@
+# password usada aqui es 84Uniq@ ,utiliza el tuyo
 ```
 
 ```
@@ -63,21 +63,22 @@ apt -y install apache2
 apt -y install php libapache2-mod-php php-{gd,common,mail,mail-mime,mysql,pear,mbstring,xml,curl}
 apt -y install freeradius freeradius-mysql freeradius-utils
 systemctl enable --now freeradius.service
-mysql -u root -p radius < etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql
-ln -s etc/freeradius/3.0/mods-available/sql etc/freeradius/3.0/mods-enabled/
-nano etc/freeradius/3.0/mods-enabled/sql
+mysql -u root -p radius < /etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql
+ln -s /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/
+#nano /etc/freeradius/3.0/mods-enabled/sql
 apt install -y git
 ```
 
 ```
 git clone https://github.com/wirisp/Daloradius-Wireguard-Pihole-unbound.git dapiun
 \mv /root/dapiun/sql /etc/freeradius/3.0/mods-available/sql
-nano etc/freeradius/3.0/mods-enabled/sql
+nano /etc/freeradius/3.0/mods-enabled/sql
+#Cambia el password 84Uniq@
 ```
 
 ```
-chgrp -h freerad etc/freeradius/3.0/mods-available/sql
-chown -R freerad:freerad etc/freeradius/3.0/mods-enabled/sql
+chgrp -h freerad /etc/freeradius/3.0/mods-available/sql
+chown -R freerad:freerad /etc/freeradius/3.0/mods-enabled/sql
 ```
 
 ```
@@ -108,6 +109,7 @@ sudo mv daloradius /var/www/html/
 chown -R www-data:www-data /var/www/html/daloradius/
 chmod 664 /var/www/html/daloradius/library/daloradius.conf.php
 nano /var/www/html/daloradius/library/daloradius.conf.php
+#Cambia el password en CONFIG_DB_PASS por el tuyo
 ```
 
 ```
@@ -128,22 +130,23 @@ pear channel-update pear.php.net
 En estos archivos que moveremos, podemos ver que hemos efectuado algunos cambios, hay una leyenda en ellos que dice 
 > wirisp Cambiar aqui
 ```
-\mv /root/dapiun/radiusd.conf etc/freeradius/3.0/radiusd.conf
+\mv /root/dapiun/radiusd.conf /etc/freeradius/3.0/radiusd.conf
 nano /etc/freeradius/3.0/radiusd.conf
 ```
 
 ```
+#Falta el index
 \mv /root/dapiun/index.php /var/www/html/index.php
 ```
 
 ```
-\mv /root/dapiun/default etc/freeradius/3.0/sites-enabled/default
-nano etc/freeradius/3.0/sites-enabled/default
+\mv /root/dapiun/default /etc/freeradius/3.0/sites-enabled/default
+nano /etc/freeradius/3.0/sites-enabled/default
 ```
 
 ```
-\mv /root/dapiun/sqlcounter etc/freeradius/3.0/mods-available/sqlcounter
-#nano etc/freeradius/3.0/mods-available/sqlcounter
+\mv /root/dapiun/sqlcounter /etc/freeradius/3.0/mods-available/sqlcounter
+#nano /etc/freeradius/3.0/mods-available/sqlcounter
 ```
 
 ```
@@ -173,7 +176,7 @@ _Cambiamos case sensitive=yes a no_
 \mv /root/dapiun/radutmp /etc/freeradius/3.0/mods-enabled/radutmp
 ```
 ```
-cd dapiun
+#No existe falta base.sql
 mysql -p -u root radius < /root/dapiun/base.sql
 ```
 
