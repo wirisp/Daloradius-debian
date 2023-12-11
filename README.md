@@ -217,10 +217,12 @@ chmod 777  /var/log/syslog
 chmod 777 /var/log/freeradius
 ```
 ### Iniciar sesion
+
+```
 WEB: IP/daloradius
 Usuario: administrator
 Pass: 84Uniq@
-Pass2 si el primero no funciona: radius
+```
 
 ### backup db
 ```
