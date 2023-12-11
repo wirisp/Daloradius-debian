@@ -1,8 +1,8 @@
-# Daloradius debian 11 para mikrotik
+# Daloradius en debian 11 ( o ubuntu ) 
 Se realiza la instalacion de Daloradius ,en conjunto con Pihole y unbound :shipit:
 
 - [x] Daloradius
-
+- [x] mariadb con repo para Debian y tambien para Ubuntu (Cambiar la version y quitar las almoadillas # del repositorio)
 ## Preparacion del vps 
 - Activar ipv6 en contabo
 ```
