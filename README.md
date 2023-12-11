@@ -135,8 +135,8 @@ nano /etc/freeradius/3.0/radiusd.conf
 ```
 
 ```
-#Falta el index
-\mv /root/dapiun/index.php /var/www/html/index.php
+#Index con error corregido base de datos check
+\mv /root/dapiun/exten-radius_server_info.php /var/www/html/daloradius/library/exten-radius_server_info.php
 ```
 
 ```
@@ -194,6 +194,16 @@ systemctl restart freeradius
 ```
 
 - Error en daloradius ,serivicio Mysql muestra = disabled
+
+Forma 1
+
+```
+#Index con error corregido base de datos check
+\mv /root/dapiun/exten-radius_server_info.php /var/www/html/daloradius/library/exten-radius_server_info.php
+```
+
+forma 2
+
 ```
 nano -l /var/www/html/daloradius/library/exten-radius_server_info.php
 ```
