@@ -21,7 +21,7 @@ passwd root
 service ssh restart
 systemctl restart sshd
 mkdir .ssh
-nano authorized_keys
+nano /root/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys && chmod 700 ~/.ssh/
 apt update
 ```
