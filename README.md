@@ -135,7 +135,7 @@ nano /etc/freeradius/3.0/radiusd.conf
 ```
 
 ```
-#Index con error corregido base de datos check
+#Index con error corregido base de datos check (mariadb)
 \mv /root/dapiun/exten-radius_server_info.php /var/www/html/daloradius/library/exten-radius_server_info.php
 ```
 
@@ -193,9 +193,10 @@ systemctl status freeradius
 systemctl restart freeradius
 ```
 
-- Error en daloradius ,serivicio Mysql muestra = disabled
+- correccion de Error en daloradius ,al checar servicios, Mysql muestra = disabled
 
 Forma 1
+Anteriormente se reemplazo un archivo con una copia ya corregida, el comando fue el siguiente por lo que al relanzarlo dara error de que no existe ya ya esta corregida.
 
 ```
 #Index con error corregido base de datos check
