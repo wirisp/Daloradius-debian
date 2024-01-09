@@ -177,7 +177,7 @@ _Cambiamos case sensitive=yes a no_
 ```
 ```
 #No existe falta base.sql
-wget https://raw.githubusercontent.com/wirisp/daloup/main/dbname.sql -O /root/dapiun/base.sql
+wget https://raw.githubusercontent.com/wirisp/daloup/main/base.sql -O /root/dapiun/base.sql
 mysql -p -u root radius < /root/dapiun/base.sql
 ```
 
